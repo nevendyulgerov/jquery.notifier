@@ -276,3 +276,32 @@ The last example can be further enhanced by adding a delay, like this:
 
 As you might have guessed, the above code will initialize a notification and when the event 'my_app.events.save' gets triggered, the notification will be shown with a delay of 1 second.
 
+By default, $.notifier uses [Font Awesose icons](http://fontawesome.io/) for its icons. If your application doesn't support Font Awesome, you can pass your own icon classes to the plugin upon initialization, like this:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init({
+			icons: {
+				success: 'class-for-success',
+				info: 'class-for-info',
+				warning: 'class-for-warning',
+				failure: 'class-for-failure'
+			}
+		});
+		
+		// display notification when event 'my_app.events.save' is triggered
+		$notifier.notify('success', {
+			title: 'Save',
+			subtitle: 'Your data has been successfully saved'
+		});
+	});
+</script>
+```
+
+The above code will initialize $.notifier with your custom icon classes
