@@ -132,7 +132,7 @@ You can can pass callbacks to notifier in two ways:
 		$notifier.notify('success', {
 			title: 'Success',
 			subtitle: 'Hey, you made it!'
-		}, 1000, {
+		}, 0, {
 			show: function() {
 				console.log('This callback will be executed when this notification is opened');
 			},
@@ -143,3 +143,5 @@ You can can pass callbacks to notifier in two ways:
 	});
 </script>
 ```
+
+In the example above, notice the 3rd argument - 0. This is the value for the delay. When adding callbacks for show/hide, you need to explicitly define the delay for the notification. In case you do not want a delay, simply set the delay to 0 or null.
