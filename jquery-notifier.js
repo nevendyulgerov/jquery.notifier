@@ -10,14 +10,11 @@
             failure: 'fa fa-times'
         };
 
-
         // @protected method hide
         var show  = function() {};
 
-
         // @protected method hide
         var hide  = function() {};
-
 
         // @private object notification
         var notification = (function() {
@@ -129,14 +126,31 @@
 
 
         // @public notify
-        var notify = function(type, args, delay, callbacks) {
-            // set delay
-            delay = typeof delay === 'number' && delay > 0 ? delay : 0;
+        var notify = function(type, args) {
 
-            // show notification with delay
-            setTimeout(function() {
-                notification.show(type, args, callbacks);
-            }, delay);
+            // set args
+            args = typeof args === 'object' ? args : {};
+
+            // set delay
+            var delay = typeof args.delay === 'number' && args.delay > 0 ? args.delay : 0;
+
+            // set callbacks
+            var callbacks = typeof args.callbacks === 'object' ? args.callbacks : {}; 
+
+            // show notification on event, if client has defined an event
+            if ( typeof args.showOnEvent !== 'undefined' && args.showOnEvent.length > 0 ) {
+                $(document).on(args.showOnEvent, function() {
+                    // show notification with delay
+                    setTimeout(function() {
+                        notification.show(type, args, callbacks);
+                    }, delay);
+                });
+            } else {
+                // show notification with delay
+                setTimeout(function() {
+                    notification.show(type, args, callbacks);
+                }, delay);
+            }
 
             // enable cascade
             return this;

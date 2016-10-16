@@ -119,16 +119,19 @@ You can also define a delay for each notification like this:
 		$notifier
 			.notify('success', {
 				title: 'Success',
-				subtitle: 'Hey, you made it!'
-			}, 1000)
+				subtitle: 'Hey, you made it!',
+				delay: 1000
+			})
 			.notify('info', {
 				title: 'Info',
-				subtitle: 'This is a standard message'
-			}, 2000)
+				subtitle: 'This is a standard message',
+				delay: 2000
+			})
 			.notify('failure', {
 				title: 'Error',
-				subtitle: 'This is your typical error message' 
-			}, 3000);
+				subtitle: 'This is your typical error message', 
+				delay: 3000
+			});
 	});
 </script>
 ```
@@ -159,17 +162,18 @@ You can can pass callbacks to notifier in two ways:
 		// display notification with 'local' callbacks
 		$notifier.notify('success', {
 			title: 'Success',
-			subtitle: 'Hey, you made it!'
-		}, 0, {
-			show: function() {
-				console.log('This callback will be executed when this notification is opened');
-			},
-			hide: function() {
-				console.log('This callback will be executed when this notification is closed.');
-			}
+			subtitle: 'Hey, you made it!',
+			callbacks: {
+				show: function() {
+					console.log('This callback will be executed when this notification is opened');
+				},
+				hide: function() {
+					console.log('This callback will be executed when this notification is closed.');
+				}
+			}			
 		});
 	});
 </script>
 ```
 
-In the example above, notice the 3rd argument - 0. This is the value for the delay. When adding local callbacks for show/hide, you must explicitly define the delay for the notification. In case you do not want a delay, simply set the delay to 0 or null.
+The global callbacks will be executed everytime a notification is shown/hidden. The local callbacks, however, will be executed only when their notification is show/hidden.
