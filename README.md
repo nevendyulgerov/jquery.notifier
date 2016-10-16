@@ -295,7 +295,7 @@ By default, $.notifier uses [Font Awesose icons](http://fontawesome.io/) for its
 			}
 		});
 		
-		// display notification when event 'my_app.events.save' is triggered
+		// display notification
 		$notifier.notify('success', {
 			title: 'Save',
 			subtitle: 'Your data has been successfully saved'
