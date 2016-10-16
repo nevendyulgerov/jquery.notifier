@@ -340,8 +340,8 @@ Here's a full-featured example of a success notification:
 			type: 'success',
 			title: 'Success',
 			subtitle: 'Subtitle for the success message...',
-			delay: 1000,
 			showOnEvent: 'notifier.notify',
+			delay: 1000,
 			callbacks: {
 				show: function() {
 					$notifier.notify({
