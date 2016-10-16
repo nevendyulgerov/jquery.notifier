@@ -5,19 +5,21 @@
         // @private property object icons
         var icons = null;
 
+
         // @protected method hide
         var show  = function() {};
+
 
         // @protected method hide
         var hide  = function() {};
 
 
-        // @private object notifications
-        var note = (function() {
+        // @private object notification
+        var notification = (function() {
             return {
                 styles: {
                     wrapper: 'position:fixed; top: 20px; right: 20px; line-height: 1.2; z-index: 999;',
-                    notification: 'position: relative; width: 320px; padding: 25px; margin-bottom: 20px; z-index: 999; box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); transition: all, 0.3s;',
+                    notification: 'opacity: 0.0, display: none; position: relative; width: 320px; padding: 25px; margin-bottom: 20px; z-index: 999; box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); transition: all, 0.3s;',
                     title: 'font-size: 30px; text-transform: uppercase;',
                     subtitle: '',
                     icon: 'position: relative; font-size: 32px; padding: 0px 10px 0px 0px;',
@@ -26,20 +28,20 @@
                     warning: 'background-color: #fcf8e3; color: #8a6d3b;',
                     failure: 'background-color: #f2dede; color: #a94442;'
                 },
-                selector: 'notifications',
+                globalWrapper: 'body',
+                wrapper: 'notifications',
+                selector: 'notification',
                 init: function() {
-                    var that = this;
-                    var $wrapper = $('body');
+                    var $globalWrapper = $(this.globalWrapper);
 
-                    $wrapper.css({ position: 'relative' });
-
-                    $wrapper.append('<div class="' + this.selector + '" style="' + that.styles.wrapper + '"></div>');
+                    $globalWrapper.css({ position: 'relative' });
+                    $globalWrapper.append('<div class="' + this.wrapper + '" style="' + this.styles.wrapper + '"></div>');
                 },
                 exists: function() {
-                    return $('.'+this.selector).length > 0;
+                    return $('.' + this.wrapper).length > 0;
                 },
                 getCallbacks: function(callbacks) {
-                    callbacks = typeof callbacks === 'object' ? callbacks : {};
+                    callbacks      = typeof callbacks === 'object' ? callbacks : {};
                     callbacks.show = this.getCallback(callbacks['show']);
                     callbacks.hide = this.getCallback(callbacks['hide']);
 
@@ -48,26 +50,51 @@
                 getCallback: function(callback) {
                     return typeof callback === 'function' ? callback : function() {};
                 },
+                getTemplate: function(settings) {
+                    var html = '<div class="' + this.selector + ' ' + settings.type + '" data-index="' + settings.index + '" style="' + this.styles.notification + this.styles[settings.type] + '"><p style="' + this.styles.title + '"><span class="icon dashicons ' + settings.icon + '" style="' + this.styles.icon + '"></span>' + settings.args.title + '</p><p style="' + this.styles.subtitle + '">' + settings.args.subtitle + '</p></div>';
+
+                    return html;
+                },
                 show: function(type, args, callbacks) {
-                    var that = this;
+                    
+                    // get callbacks
                     callbacks = this.getCallbacks(callbacks);
 
+                    // initialize, if not initialized already
                     if ( ! this.exists() ) {
                         this.init();
                     }
 
+                    // set default notification type
                     if ( ! icons.hasOwnProperty(type) ) {
-                        type = 'success';
+                        type = 'info';
                     }
 
-                    var icon = icons[type];
+                    // set notification settings
+                    var settings = {
+                        args: args,
+                        type: type,
+                        icon: icons[type],
+                        index: $('.notification').length
+                    };
 
-                    var index = $('.notification').length;
-                    $('.'+this.selector).append('<div class="notification ' + type + '" data-index="' + index + '" style="' + that.styles.notification + that.styles[type] + '"><p style="' + that.styles.title + '"><span class="icon dashicons ' + icon + '" style="' + that.styles.icon + '"></span>' + args.title + '</p><p style="' + that.styles.subtitle + '">' + args.subtitle + '</p></div>');
+                    // get notification html
+                    var html = this.getTemplate(settings);
 
+                    // append notification to wrapper
+                    $('.' + this.wrapper).append(html);
+
+                    // fade in notification
+                    $('.' + this.selector + '[data-index="' + settings.index + '"]').show();
+
+                    // execute global show
                     show();
+
+                    // execute local show
                     callbacks.show();
-                    this.hide(index, callbacks.hide);
+
+                    // call hide action
+                    this.hide(settings.index, callbacks.hide);
                 },
                 hide: function(index, callback) {
                     var that = this;
@@ -80,7 +107,10 @@
                             $notification.fadeOut(300, function() {
                                 $notification.remove();
 
+                                // execute global hide
                                 hide();
+
+                                // execute local hide
                                 callback();
                             });
                         }
@@ -95,7 +125,7 @@
             delay = typeof delay === 'number' && delay > 0 ? delay : 0;
 
             setTimeout(function() {
-                note.show(type, args, callbacks);
+                notification.show(type, args, callbacks);
             }, delay);
 
             // enable cascade
@@ -105,12 +135,16 @@
 
         // @public init
         var init = function(args) {
+
+            // configure args
             args = typeof args === 'object' ? args : {};
 
+            // update show callback, if the client has provided one
             if ( typeof args.show === 'function' ) {
                 show = args.show;
             }
 
+            // update hide callback, if the client has provided one
             if ( typeof args.hide === 'function' ) {
                 hide = args.hide;
             }
