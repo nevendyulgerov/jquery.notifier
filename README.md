@@ -262,7 +262,7 @@ The third and more advanced option is to show the notification upon event trigge
 </script>
 ```
 
-The above code will initialize a notification and show it on the page, when the event 'my_app.events.save' gets triggered. 
+The above code will initialize a notification and show it on the page, when the event 'my_app.events.save' gets triggered. This way of displaying a notification can be particularly useful if your application is event-driven.
 
 The last example can be further enhanced by adding a delay, like this:
 
@@ -320,3 +320,61 @@ By default, $.notifier uses [Font Awesose icons](http://fontawesome.io/) for its
 ```
 
 The above code will initialize $.notifier with your custom icon classes.
+
+# Examples
+
+Here's a full-featured example of a success notification:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init({
+			icons: {
+				success: 'class-for-success',
+				info: 'class-for-info',
+				warning: 'class-for-warning',
+				failure: 'class-for-failure'
+			}
+		});
+		
+		// display notification
+		$notifier.notify({
+			type: 'success',
+			title: 'Success',
+			subtitle: 'Subtitle for the success message...',
+			delay: 1000,
+			showOnEvent: 'notifier.notify',
+			callbacks: {
+				show: function() {
+					$notifier.notify({
+						type: 'info',
+						title: 'Show',
+						subtitle: 'Notification for the Show callback',
+						delay: 1000
+					});
+				},
+				hide: function() {
+					$notifier.notify({
+						type: 'warning',
+						title: 'Hide',
+						subtitle: 'Notification for the Hide callback',
+						delay: 1000
+					});
+				}
+			}
+		});
+
+
+		// you can trigger the 'success' notification anytime with:
+		// $(document).trigger('notifier.notify');
+	});
+</script>
+```
+
+The 'success' notification above will be executed when the event 'notifier.notify' is triggered. The execution will be delayed with 1 second. On the show event of the notification a new 'info' notification will appear with a 1 second delay. On the hide event of the notification a new 'warning' notification will appear, again with a 1 second delay.
+
