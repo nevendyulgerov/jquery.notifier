@@ -106,3 +106,46 @@ You can also define a delay for each notification like this:
 ```
 
 In the example above, the 'success' notification will appear after 1 second, the 'info' notification will appear after 2 seconds and the 'failure' notification after 3 seconds.
+
+# Callbacks
+
+You can can pass callbacks to notifier in two ways:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialze notifier with 'global' callbacks
+		$notifier.init({
+			icons: {
+				success: '',
+				info: '',
+				warning: '',
+				failure: ''
+			},
+			show: function() {
+				console.log('This callback will be executed every time a notification is opened');
+			},
+			hide: function() {
+				console.log('This callback will be executed every time a notification is closed');
+			}
+		});
+		
+		// display notification with 'local' callbacks
+		$notifier
+			.notify('success', {
+				title: 'Success',
+				subtitle: 'Hey, you made it!',
+				show: function() {
+					console.log('This callback will be executed when this notification is opened');
+				},
+				hide: function() {
+					console.log('This callback will be executed when this notification is closed.);
+				}
+			}, 1000)
+	});
+</script>
+```
