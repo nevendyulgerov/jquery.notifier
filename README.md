@@ -130,7 +130,7 @@ You can also define a delay for each notification like this:
 				delay: 1000
 			})
 			.notify({
-				type: 'success',
+				type: 'info',
 				title: 'Info',
 				subtitle: 'This is a standard message',
 				delay: 2000
