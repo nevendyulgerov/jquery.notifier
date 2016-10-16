@@ -1,5 +1,7 @@
 
-jQuery Notifier ($.notifier) is a light-weight notification plugin, developed by Neven Dyulgerov. The plugin exposes a simple API for displaying notifications for success, warning, info and failure with custom messages.
+jQuery Notifier ($.notifier) is a light-weight notification plugin, developed by Neven Dyulgerov. The plugin exposes a simple API for displaying notifications for success, warning, info and failure with custom messages. 
+
+The non-minified version of the plugin is 7 KB, while the minified is just 3 KB. This makes this plugin quite useful if you want minimum overhead to your code base.
 
 # Requirements
 
