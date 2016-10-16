@@ -319,4 +319,4 @@ By default, $.notifier uses [Font Awesose icons](http://fontawesome.io/) for its
 </script>
 ```
 
-The above code will initialize $.notifier with your custom icon classes
+The above code will initialize $.notifier with your custom icon classes.
