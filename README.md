@@ -1,7 +1,7 @@
 
 jQuery Notifier ($.notifier) is a light-weight notification plugin, developed by Neven Dyulgerov. The plugin exposes a simple API for displaying notifications for success, warning, info and failure with custom messages. 
 
-$.notifier has been designed with performance in mind. The non-minified version of the plugin is 8 KB, while the minified is just 3 KB. This makes $.notifier quite useful if you want minimum overhead to your code base.
+$.notifier has been designed with performance in mind. The non-minified version of the plugin is 8 KB, while the minified is just 3 KB. This makes $.notifier a good match for anyone looking for a lean full-featured notification plugin.
 
 # Requirements
 
@@ -65,7 +65,8 @@ You can use $.notifier like this:
 		$notifier.init();
 		
 		// display notification for success
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Success',
 			subtitle: 'Hey, you made it!'
 		});
@@ -89,15 +90,18 @@ $.notifier supports the cascade pattern, so you can chain notifications like thi
 		
 		// display chained notifications
 		$notifier
-			.notify('success', {
+			.notify({
+				type: 'success',
 				title: 'Success',
 				subtitle: 'Hey, you made it!'
 			})
-			.notify('info', {
+			.notify({
+				type: 'info',
 				title: 'Info',
 				subtitle: 'This is a standard message'
 			})
-			.notify('failure', {
+			.notify({
+				type: 'failure',
 				title: 'Error',
 				subtitle: 'This is your typical error message' 
 			});
@@ -162,7 +166,8 @@ You can can pass callbacks to notifier in two ways:
 		});
 		
 		// display notification with 'local' callbacks
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Success',
 			subtitle: 'Hey, you made it!',
 			callbacks: {
@@ -195,7 +200,8 @@ You can call a notification in three ways. The traditional way is by just callin
 		$notifier.init();
 		
 		// display notification
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Success',
 			subtitle: 'Hey, you made it!'
 		});
@@ -218,7 +224,8 @@ Alternatively, you can show the notification with a delay as we saw previously:
 		$notifier.init();
 		
 		// display notification with delay
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Success',
 			subtitle: 'Hey, you made it!',
 			delay: 1000
@@ -242,7 +249,8 @@ The third and more advanced option is to show the notification upon event trigge
 		$notifier.init();
 		
 		// display notification when event 'my_app.events.save' is triggered
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Save',
 			subtitle: 'Your data has been successfully saved',
 			showOnEvent: 'my_app.events.save'
@@ -266,7 +274,8 @@ The last example can be further enhanced by adding a delay, like this:
 		$notifier.init();
 		
 		// display notification when event 'my_app.events.save' is triggered
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Save',
 			subtitle: 'Your data has been successfully saved',
 			showOnEvent: 'my_app.events.save',
@@ -298,7 +307,8 @@ By default, $.notifier uses [Font Awesose icons](http://fontawesome.io/) for its
 		});
 		
 		// display notification
-		$notifier.notify('success', {
+		$notifier.notify({
+			type: 'success',
 			title: 'Save',
 			subtitle: 'Your data has been successfully saved'
 		});

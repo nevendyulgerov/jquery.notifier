@@ -57,10 +57,13 @@
 
                     return html;
                 },
-                show: function(type, args, callbacks) {
+                show: function(args) {
+
+                    // get type
+                    var type = args.type;
                     
                     // get callbacks
-                    callbacks = this.getCallbacks(callbacks);
+                    var callbacks = this.getCallbacks(args.callbacks);
 
                     // initialize, if not initialized already
                     if ( ! this.exists() ) {
@@ -74,7 +77,10 @@
 
                     // set notification settings
                     var settings = {
-                        args: args,
+                        args: {
+                            title: args.title,
+                            subtitle: args.subtitle
+                        },
                         type: type,
                         icon: icons[type],
                         index: $('.' + this.selector).length
@@ -126,7 +132,7 @@
 
 
         // @public notify
-        var notify = function(type, args) {
+        var notify = function(args) {
 
             // set args
             args = typeof args === 'object' ? args : {};
@@ -134,21 +140,18 @@
             // set delay
             var delay = typeof args.delay === 'number' && args.delay > 0 ? args.delay : 0;
 
-            // set callbacks
-            var callbacks = typeof args.callbacks === 'object' ? args.callbacks : {}; 
-
             // show notification on event, if client has defined an event
             if ( typeof args.showOnEvent !== 'undefined' && args.showOnEvent.length > 0 ) {
                 $(document).on(args.showOnEvent, function() {
                     // show notification with delay
                     setTimeout(function() {
-                        notification.show(type, args, callbacks);
+                        notification.show(args);
                     }, delay);
                 });
             } else {
                 // show notification with delay
                 setTimeout(function() {
-                    notification.show(type, args, callbacks);
+                    notification.show(args);
                 }, delay);
             }
 
