@@ -333,14 +333,7 @@ Here's a full-featured example of a success notification:
 		var $notifier = $('body').notifier;
 		
 		// initialize notifier
-		$notifier.init({
-			icons: {
-				success: 'class-for-success',
-				info: 'class-for-info',
-				warning: 'class-for-warning',
-				failure: 'class-for-failure'
-			}
-		});
+		$notifier.init();
 		
 		// display notification
 		$notifier.notify({
@@ -376,5 +369,5 @@ Here's a full-featured example of a success notification:
 </script>
 ```
 
-The 'success' notification above will be executed when the event 'notifier.notify' is triggered. The execution will be delayed with 1 second. On the show event of the notification a new 'info' notification will appear with a 1 second delay. On the hide event of the notification a new 'warning' notification will appear, again with a 1 second delay.
+The 'success' notification above will be executed when the event 'notifier.notify' is triggered. The execution will be delayed with 1 second. On the show event of the notification a new 'info' notification will appear with a delay of 1 second. On the hide event of the notification a new 'warning' notification will appear, again with a delay of 1 second.
 
