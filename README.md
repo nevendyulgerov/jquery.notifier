@@ -39,7 +39,7 @@ You can use $.notifier like this:
 		// cache notifier
 		var $notifier = $('body').notifier;
 		
-		// initialze notifier
+		// initialize notifier
 		$notifier.init();
 		
 		// display notification for success
@@ -60,7 +60,7 @@ $.notifier supports the cascade pattern, so you can chain notifications like thi
 		// cache notifier
 		var $notifier = $('body').notifier;
 		
-		// initialze notifier
+		// initialize notifier
 		$notifier.init();
 		
 		// display chained notifications
@@ -90,7 +90,7 @@ You can also define a delay for each notification like this:
 		// cache notifier
 		var $notifier = $('body').notifier;
 		
-		// initialze notifier
+		// initialize notifier
 		$notifier.init();
 		
 		// display chained notifications with delay
@@ -124,7 +124,7 @@ You can can pass callbacks to notifier in two ways:
 		// cache notifier
 		var $notifier = $('body').notifier;
 		
-		// initialze notifier with 'global' callbacks
+		// initialize notifier with 'global' callbacks
 		$notifier.init({
 			show: function() {
 				console.log('This callback will be executed every time a notification is opened');
