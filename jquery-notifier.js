@@ -3,7 +3,12 @@
     $.fn.notifier = (function() {
 
         // @private property object icons
-        var icons = null;
+        var icons = {
+            success: 'fa fa-check',
+            info:    'fa fa-info',
+            warning: 'fa fa-exclamation',
+            failure: 'fa fa-times'
+        };
 
 
         // @protected method hide
@@ -75,7 +80,7 @@
                         args: args,
                         type: type,
                         icon: icons[type],
-                        index: $('.notification').length
+                        index: $('.' + this.selector).length
                     };
 
                     // get notification html
@@ -84,8 +89,9 @@
                     // append notification to wrapper
                     $('.' + this.wrapper).append(html);
 
-                    // fade in notification
-                    $('.' + this.selector + '[data-index="' + settings.index + '"]').show();
+                    // show notification
+                    var $notification = $('.' + this.selector + '[data-index="' + settings.index + '"]');
+                    $notification.show();
 
                     // execute global show
                     show();
@@ -100,19 +106,21 @@
                     var that = this;
 
                     setTimeout(function() {
-                        if ( $('.notification[data-index="' + index + '"]:hover').length != 0 ) {
+                        if ( $('.' + that.selector + '[data-index="' + index + '"]:hover').length != 0 ) {
+
+                            // call hide recursively
                             that.hide(index, callback);
                         } else {
-                            var $notification = $('.notification[data-index="' + index + '"]');
-                            $notification.fadeOut(300, function() {
-                                $notification.remove();
 
-                                // execute global hide
-                                hide();
+                            // hide notification
+                            var $notification = $('.' + that.selector + '[data-index="' + index + '"]');
+                            $notification.hide();
 
-                                // execute local hide
-                                callback();
-                            });
+                            // execute global hide
+                            hide();
+
+                            // execute local hide
+                            callback();
                         }
                     }, 7500);
                 }
@@ -122,8 +130,10 @@
 
         // @public notify
         var notify = function(type, args, delay, callbacks) {
+            // set delay
             delay = typeof delay === 'number' && delay > 0 ? delay : 0;
 
+            // show notification with delay
             setTimeout(function() {
                 notification.show(type, args, callbacks);
             }, delay);
@@ -149,13 +159,10 @@
                 hide = args.hide;
             }
 
-            // set icons
-            icons = args['icons'] || {
-                success: 'fa fa-check',
-                info:    'fa fa-info',
-                warning: 'fa fa-exclamation',
-                failure: 'fa fa-times'
-            };
+            // update icons, if the client has provided icons
+            if ( typeof args.icons === 'object' ) {
+                icons = args.icons;
+            }
         };
 
         // notify
