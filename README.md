@@ -10,13 +10,13 @@ jQuery (1.6 or higher)
 
 # Getting Started
 
+You can clone or download $.notifier from this repository. The download includes a non-minified and minified version of the plugin.
+
 $.notifier requires jQuery to work. So, make sure that you have jQuery included on your page before loading the plugin:
 
 ```javascript
 <script type="text/javascript" src="path-to-jquery/jquery.js"></script>
 ```
-
-You can clone or download $.notifier from this repository. The download includes a non-minified and minified version of the plugin.
 
 To include the minified version of the plugin on your page, simply add:
 
