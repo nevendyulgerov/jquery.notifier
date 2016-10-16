@@ -177,3 +177,102 @@ You can can pass callbacks to notifier in two ways:
 ```
 
 The global callbacks will be executed everytime a notification is shown/hidden. The local callbacks, however, will be executed only when their notification is show/hidden.
+
+# Options
+
+You can call a notification in three ways. The traditional way is by just calling:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init();
+		
+		// display notification
+		$notifier.notify('success', {
+			title: 'Success',
+			subtitle: 'Hey, you made it!'
+		});
+	});
+</script>
+```
+
+The above code will simply initialize a notification and show it on the page right away. 
+
+Alternatively, you can show the notification with a delay as we saw previously:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init();
+		
+		// display notification with delay
+		$notifier.notify('success', {
+			title: 'Success',
+			subtitle: 'Hey, you made it!',
+			delay: 1000
+		});
+	});
+</script>
+```
+
+The above code will initialize a notification and show it on the page after 1 second.
+
+The third and more advanced option is to show the notification upon event trigger. This can be done, using the 'showOnEvent' parameter:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init();
+		
+		// display notification when event 'my_app.events.save' is triggered
+		$notifier.notify('success', {
+			title: 'Save',
+			subtitle: 'Your data has been successfully saved',
+			showOnEvent: 'my_app.events.save'
+		});
+	});
+</script>
+```
+
+The above code will initialize a notification and show it on the page, when the event 'my_app.events.save' gets triggered. 
+
+The last example can be further enhanced by adding a delay, like this:
+
+```javascript
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		// cache notifier
+		var $notifier = $('body').notifier;
+		
+		// initialize notifier
+		$notifier.init();
+		
+		// display notification when event 'my_app.events.save' is triggered
+		$notifier.notify('success', {
+			title: 'Save',
+			subtitle: 'Your data has been successfully saved',
+			showOnEvent: 'my_app.events.save',
+			delay: 1000
+		});
+	});
+</script>
+```
+
+As you might have guessed, the above code will initialize a notification and when the event 'my_app.events.save' gets triggered, the notification will be shown with a delay of 1 second.
+
