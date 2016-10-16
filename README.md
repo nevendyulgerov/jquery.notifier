@@ -73,6 +73,8 @@ You can use $.notifier like this:
 </script>
 ```
 
+The above code will initialize a 'success' notification with title 'Success' and subtitle 'Hey, you made it!' and display it immediately on the screen.
+
 $.notifier supports the cascade pattern, so you can chain notifications like this:
 
 ```javascript
