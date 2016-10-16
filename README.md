@@ -129,17 +129,17 @@ You can can pass callbacks to notifier in two ways:
 		});
 		
 		// display notification with 'local' callbacks
-		$notifier
-			.notify('success', {
-				title: 'Success',
-				subtitle: 'Hey, you made it!',
-				show: function() {
-					console.log('This callback will be executed when this notification is opened');
-				},
-				hide: function() {
-					console.log('This callback will be executed when this notification is closed.');
-				}
-			}, 1000)
+		$notifier.notify('success', {
+			title: 'Success',
+			subtitle: 'Hey, you made it!'
+		}, 1000, {
+			show: function() {
+				console.log('This callback will be executed when this notification is opened');
+			},
+			hide: function() {
+				console.log('This callback will be executed when this notification is closed.');
+			}
+		});
 	});
 </script>
 ```
