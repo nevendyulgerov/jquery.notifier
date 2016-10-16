@@ -33,20 +33,20 @@ To include the non-minified version of the plugin, add:
 Alternatively, you can include the plugin in an async manner, like this:
 
 ```javascript
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+	
+		// define path to jquery-notifier
+		var pluginUrl = 'path-to-plugin/jquery-notifier.js';
 		
-			// define path to jquery-notifier
-			var pluginUrl = 'path-to-plugin/jquery-notifier.js';
+		// get plugin asynchronously
+		$.getScript(pluginUrl, function() {
+			// the plugin is loaded and ready to use
 			
-			// get plugin asynchronously
-			$.getScript(pluginUrl, function() {
-				// the plugin is loaded and ready to use
-				
-				// your code goes here...
-			});
+			// your code goes here...
 		});
-	</script>
+	});
+</script>
 ```
 
 
