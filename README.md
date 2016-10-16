@@ -30,6 +30,21 @@ To include the non-minified version of the plugin, add:
 <script type="text/javascript" src="path-to-plugin/jquery-notifier.js"></script>
 ```
 
+Alternatively, you can include the plugin in an async manner, like this:
+
+```javascript
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			var pluginUrl = 'path-to-plugin/jquery-notifier.js';
+			
+			$.getScript(pluginUrl, function() {
+				// your code
+			});
+		});
+	</script>
+```
+
+
 # How to Use
 
 You can use $.notifier like this:
