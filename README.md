@@ -123,17 +123,20 @@ You can also define a delay for each notification like this:
 		
 		// display chained notifications with delay
 		$notifier
-			.notify('success', {
+			.notify({
+				type: 'success',
 				title: 'Success',
 				subtitle: 'Hey, you made it!',
 				delay: 1000
 			})
-			.notify('info', {
+			.notify({
+				type: 'success',
 				title: 'Info',
 				subtitle: 'This is a standard message',
 				delay: 2000
 			})
-			.notify('failure', {
+			.notify({
+				type: 'failure',
 				title: 'Error',
 				subtitle: 'This is your typical error message', 
 				delay: 3000
