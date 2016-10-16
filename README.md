@@ -138,7 +138,7 @@ You can can pass callbacks to notifier in two ways:
 					console.log('This callback will be executed when this notification is opened');
 				},
 				hide: function() {
-					console.log('This callback will be executed when this notification is closed.);
+					console.log('This callback will be executed when this notification is closed.');
 				}
 			}, 1000)
 	});
