@@ -13,13 +13,13 @@ You can clone or download $.notifier from this repository. The download includes
 To include the minified version of the plugin on your page, simply add:
 
 ```javascript
-<script type="text/javascript" src="path-to-plugin/jquery-notifier.min.js></script>
+<script type="text/javascript" src="path-to-plugin/jquery-notifier.min.js"></script>
 ```
 
 To include the non-minified version of the plugin, add:
 
 ```javascript	
-<script type="text/javascript" src="path-to-plugin/jquery-notifier.js></script>
+<script type="text/javascript" src="path-to-plugin/jquery-notifier.js"></script>
 ```
 
 # How to Use
