@@ -120,7 +120,6 @@ You can can pass callbacks to notifier in two ways:
 		
 		// initialze notifier with 'global' callbacks
 		$notifier.init({
-			icons: {
 			show: function() {
 				console.log('This callback will be executed every time a notification is opened');
 			},
